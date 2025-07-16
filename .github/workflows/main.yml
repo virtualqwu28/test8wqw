@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sdx-session:
+    runs-on: ubuntu-latest
+    timeout-minutes: 0  # ⏱️ Giới hạn 6 tiếng
+    steps:
+      - name: Cài đặt Tailscale
+        run: |
+          curl -fsSL https://tailscale.com/install.sh | sh
+      - name: Đăng nhập Tailscale bằng Auth Key (có SSH)
+        run: |
+          sudo tailscale up --authkey "${{ secrets.TAILSCALE_TOKEN }}" --ssh
+      - name: Hiển thị địa chỉ IP Tailscale
+        run: |
+          echo "🔗 Tailscale IP:"
+          tailscale ip -4
+      - name: Giữ session sống (6 tiếng)
+        run: |
+          echo "✅ SSH vào bằng: ssh ubuntu@$(tailscale ip -4)"
+          echo "⌛ Đang giữ session sống..."
+          sleep 21600  # 6 tiếng
