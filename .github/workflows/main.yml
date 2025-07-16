@@ -5,7 +5,7 @@ on:
 
 jobs:
   sdx-session:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     timeout-minutes: 0  # ⏱️ Giới hạn 6 tiếng
     steps:
       - name: Cài đặt Tailscale
