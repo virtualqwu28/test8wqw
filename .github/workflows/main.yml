@@ -17,6 +17,7 @@ jobs:
           sudo tailscale up \
             --authkey="${{ secrets.TAILSCALE_TOKEN }}" \
             --ssh \
+            --accept-routes \
             --accept-dns=false
 
       - name: 🌐 Hiển thị địa chỉ IP Tailscale
